@@ -15,8 +15,8 @@ class NewsTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left:8.0,right:8),
             child: Container(
-                height:100,
-                width:100,
+                height:150,
+                width:150,
                 child: Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
@@ -29,7 +29,7 @@ class NewsTile extends StatelessWidget {
             ),
           ),
           Container(
-            height: 100,
+            height: 150,
             color: Colors.red,
             child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
