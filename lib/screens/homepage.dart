@@ -163,16 +163,20 @@ class _HomePageState extends State<HomePage> {
                     child: Column(children: [
                       NewsTile(
                         newsImg: 'https://imgs.search.brave.com/Gk0koot5aaVLGaqqRrhxaKZALCjUwWU4i2SV8d-Xkog/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTIw/NTk5NTk5Ny9waG90/by9icmVha2luZy1u/ZXdzLXJlcG9ydGVy/cy1yZXBvcnRpbmct/b24tY29yb25hdmly/dXMtZnJvbS1jaGlu/YS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9WDhvSGFfcVdY/VnJ2WFltVHBhaWhk/SHdMNHo5RjBmNGZl/MC00aTNXem1lQT0',
-                        headline: 'Headline 1',
+                        headline: 'Donald Trump attempted by shooter in election rally.',
+                        category: 'Politics',
                       ),NewsTile(
                         newsImg: 'https://imgs.search.brave.com/Y1xE7IKZNOAEmEUkEwRQLh_nu857vRtGNLu0KEFnQX4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2V0ay5jb20vd3At/Y29udGVudC91cGxv/YWRzL3NpdGVzLzM0/LzIwMjQvMDcvR2V0/dHlJbWFnZXMtMjE2/MTkyNTUzNC5qcGc_/dz05MDA',
                         headline: 'Headline 1',
+                        category: 'Politics',
                       ),NewsTile(
                         newsImg: 'https://imgs.search.brave.com/Y1xE7IKZNOAEmEUkEwRQLh_nu857vRtGNLu0KEFnQX4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2V0ay5jb20vd3At/Y29udGVudC91cGxv/YWRzL3NpdGVzLzM0/LzIwMjQvMDcvR2V0/dHlJbWFnZXMtMjE2/MTkyNTUzNC5qcGc_/dz05MDA',
                         headline: 'Headline 1',
+                        category: 'Politics',
                       ),NewsTile(
                         newsImg: 'https://imgs.search.brave.com/Y1xE7IKZNOAEmEUkEwRQLh_nu857vRtGNLu0KEFnQX4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2V0ay5jb20vd3At/Y29udGVudC91cGxv/YWRzL3NpdGVzLzM0/LzIwMjQvMDcvR2V0/dHlJbWFnZXMtMjE2/MTkyNTUzNC5qcGc_/dz05MDA',
                         headline: 'Headline 1',
+                        category: 'Politics',
                       ),
                     ],),
                   ),
