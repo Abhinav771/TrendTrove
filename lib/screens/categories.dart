@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/category_choice.dart';
+import '../components/category_choice_row.dart';
 class Categories extends StatefulWidget {
   const Categories({super.key});
 
@@ -21,26 +22,26 @@ class _CategoriesState extends State<Categories> {
             SizedBox(height: 30,),
             Expanded(child: SingleChildScrollView(
               child: Column(children: [
-                Row(children: [
-                Expanded(
+                CategoryChoiceRow(
+                    imgPath1:'images/categories_choice/business1.jpg',
+                    imgPath2:'images/categories_choice/health.jpg',
+                    text1:'Business',
+                    text2:'Health'
 
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16.0,top: 8,left: 16,bottom: 16),
-                      child: CategoryChoice(
-                        imgPath:'images/categories_choice/business1.jpg'
-                      )
-                    )
-                ),Expanded(
+                ), CategoryChoiceRow(
+                    imgPath1:'images/categories_choice/entertainment.jpg',
+                    imgPath2:'images/categories_choice/sports1.jpg',
+                    text1:'Entertainment',
+                    text2:'Sports'
 
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 16.0,top: 8,left: 8,bottom: 16),
-                      child: CategoryChoice(
-                        imgPath:'images/categories_choice/health.jpg'
-                      )
-                    )
+                ),CategoryChoiceRow(
+                    imgPath1:'images/categories_choice/science.jpg',
+                    imgPath2:'images/categories_choice/technology.jpg',
+                    text1:'Science',
+                    text2:'Technology'
+
                 ),
 
-              ],),
 
               ],),
             )),
@@ -52,4 +53,5 @@ class _CategoriesState extends State<Categories> {
     );
   }
 }
+
 

@@ -26,7 +26,7 @@ class _CategoryChoiceState extends State<CategoryChoice> {
           height: 200,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset('imgPath',
+            child: Image.asset(widget.imgPath,
                 fit:BoxFit.cover,height: double.infinity,width:double.infinity),
           ),
           // color: Colors.red,
