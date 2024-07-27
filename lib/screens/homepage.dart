@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
           ),
 
         ],
-        title:Text('TrendTrivo',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+        title:Text('TrendTrivo',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,fontFamily: 'LexendDeca'),),
         centerTitle: true,
       ),
       body:Column(
@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                                         hintStyle: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.bold,
+                                          fontFamily: 'LexendDeca'
 
 
                                         ),
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0,top: 16),
-                        child: Text('Breaking News', style:TextStyle(fontSize:25,fontWeight:FontWeight.bold)),
+                        child: Text('Breaking News', style:TextStyle(fontSize:25,fontWeight:FontWeight.bold,fontFamily: 'LexendDeca')),
                       ),
                     ],
                   ),
@@ -193,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                                     Positioned(
                                         bottom:30,
                                         left:30,
-                                        child: Text('${myList[i][1]}',style: TextStyle(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold),)
+                                        child: Text('${myList[i][1]}',style: TextStyle(fontSize: 24,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),)
                                     ),
                                   ],)
 
@@ -227,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 16.0,top: 16),
-                        child: Text('Recomendation', style:TextStyle(fontSize:25,fontWeight:FontWeight.bold)),
+                        child: Text('Recomendation', style:TextStyle(fontSize:25,fontWeight:FontWeight.bold,fontFamily: 'LexendDeca')),
                       ),
                     ],
                   ),

@@ -14,14 +14,16 @@ class CategoryChoiceRow extends StatefulWidget {
 
 class _CategoryChoiceRowState extends State<CategoryChoiceRow> {
   bool isSelected=true;
+  int a=0;
+
 
   // / isSelected==true?Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),):Icon(Icons.check),
   @override
 
   Widget build(BuildContext context) {
-    Widget TopContainer =Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),);
-    Widget TextContainer =Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),);
-    Widget CheckContainer=Icon(Icons.check);
+    Widget TopContainer =Icon(Icons.check,color: Colors.white,size: 60,);
+    Widget TextContainer =Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),);
+    Widget CheckContainer=Icon(Icons.check,color: Colors.white,size: 60,);
     return Row(children: [
       Expanded(
 
@@ -55,9 +57,13 @@ class _CategoryChoiceRowState extends State<CategoryChoiceRow> {
                       if(isSelected==true){
                         TopContainer=CheckContainer;
                         isSelected=false;
+                        a++;
+                        print(a);
                       }else{
                         TopContainer=TextContainer;
                         isSelected=true;
+                        a--;
+                        print(a);
 
                       }
                       setState(() {
@@ -73,7 +79,7 @@ class _CategoryChoiceRowState extends State<CategoryChoiceRow> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(height: 80,),
-                            TopContainer,
+                            TopContainer,//SetState
 
 
 
@@ -118,7 +124,7 @@ class _CategoryChoiceRowState extends State<CategoryChoiceRow> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(height: 80,),
-                          Text(widget.text2, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),),
+                          Text(widget.text2, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),),
 
                         ],)
                   ),

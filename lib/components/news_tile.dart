@@ -45,7 +45,7 @@ class NewsTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
                   child: Text(category,
-                    style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: blueColor),
+                    style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: blueColor,fontFamily: 'LexendDeca'),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     // textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class NewsTile extends StatelessWidget {
                 ),Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
                   child:  Text(headline,
-                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,),
+                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     // textAlign: TextAlign.center,

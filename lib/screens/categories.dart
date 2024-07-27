@@ -14,7 +14,7 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title:Text('Categories',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+          title:Text('Categories',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,fontFamily: 'LexendDeca'),),
           centerTitle: true,
         ),
         body: Container(
