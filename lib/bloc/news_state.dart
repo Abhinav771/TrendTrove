@@ -32,3 +32,14 @@ class NewsErrorState extends NewsState{
   List<Object?> get props =>[error];
 
 }
+
+
+class NewsCategories extends NewsState{
+  NewsCategories(this.cat);
+  List<String> cat;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [cat];
+
+}

@@ -1,138 +1,60 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+//images/categories_choice/business1.jpg
+class CategoryTile extends StatelessWidget {
+  final String imgUrl;
+  final String text;
 
-class CategoryChoiceRow extends StatefulWidget {
-  final String imgPath1;
-  final String imgPath2;
-  final String text1;
-  final String text2;
-
-  const CategoryChoiceRow({super.key, required this.imgPath1, required this.imgPath2,  required this.text1, required this.text2});
+  CategoryTile({required this.imgUrl,required this.text});
 
   @override
-  State<CategoryChoiceRow> createState() => _CategoryChoiceRowState();
-}
-
-class _CategoryChoiceRowState extends State<CategoryChoiceRow> {
-  bool isSelected=true;
-  int a=0;
-
-
-  // / isSelected==true?Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold),):Icon(Icons.check),
-  @override
-
   Widget build(BuildContext context) {
-    Widget TopContainer =Icon(Icons.check,color: Colors.white,size: 60,);
-    Widget TextContainer =Text(widget.text1, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),);
-    Widget CheckContainer=Icon(Icons.check,color: Colors.white,size: 60,);
-    return Row(children: [
-      Expanded(
+    return Container(
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
 
-          child: Padding(
-              padding: const EdgeInsets.only(right: 16.0,top: 8,left: 16,bottom: 16),
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            height: 200,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(imgUrl,
+                  fit:BoxFit.cover,height: double.infinity,width:double.infinity),
+            ),
+            // color: Colors.red,
+          ),
+          Container(
 
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: 200,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(widget.imgPath1,
-                          fit:BoxFit.cover,height: double.infinity,width:double.infinity),
-                    ),
-                    // color: Colors.red,
-                  ),
-                  Container(
+            height: 200,
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          InkWell(
+            onTap: (){
 
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: (){
-                      if(isSelected==true){
-                        TopContainer=CheckContainer;
-                        isSelected=false;
-                        a++;
-                        print(a);
-                      }else{
-                        TopContainer=TextContainer;
-                        isSelected=true;
-                        a--;
-                        print(a);
+            },
+            child: Container(
+                alignment: Alignment.center,
 
-                      }
-                      setState(() {
-
-                      });
-
-                    },
-                    child: Container(
-                        alignment: Alignment.center,
-
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(height: 80,),
-                            TopContainer,//SetState
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 80,),
+                    Text(text, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),
 
 
 
-                          ],)
-                    ),
-                  ),
-                ],
-              ),
-          )
-      ),Expanded(
-
-          child: Padding(
-              padding: const EdgeInsets.only(right: 16.0,top: 8,left: 8,bottom: 16),
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: 200,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(widget.imgPath2,
-                          fit:BoxFit.cover,height: double.infinity,width:double.infinity),
-                    ),
-                    // color: Colors.red,
-                  ),
-                  Container(
-
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  Container(
-                      alignment: Alignment.center,
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 80,),
-                          Text(widget.text2, style: TextStyle(fontSize: 25,color: Colors.white,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),),
-
-                        ],)
-                  ),
-                ],
-              )
-          )
+                    ),],)
+            ),
+          ),
+        ],
       ),
-
-    ],);
+    );
   }
 }
+

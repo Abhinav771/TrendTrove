@@ -14,11 +14,17 @@ class NewsTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
+
         height: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Row(children: [
           Padding(
-            padding: const EdgeInsets.only(left:8.0,right:8),
+            padding: const EdgeInsets.only(left:0.0,right:8),
             child: Container(
+                margin: EdgeInsets.all(8),
                 height:150,
                 width:150,
                 child: Center(
@@ -44,18 +50,29 @@ class NewsTile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
-                  child: Text(category,
-                    style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: blueColor,fontFamily: 'LexendDeca'),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    // textAlign: TextAlign.center,
+                  child: Container(
+                    height: 25,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: blueColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    
+                    child: Center(
+                      child: Text(category.toUpperCase(),
+                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: Colors.white,fontFamily: 'LexendDeca'),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        // textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
                   child:  Text(headline,
-                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),
+                    style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 3,
                     // textAlign: TextAlign.center,
                   ),
                 )

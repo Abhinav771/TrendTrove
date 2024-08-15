@@ -11,3 +11,10 @@ class LoadNews extends NewsEvent{
   List<Object?> get props => [];
 
 }
+
+class ClickOnCategory extends NewsEvent{
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+
+}

@@ -22,25 +22,60 @@ class _CategoriesState extends State<Categories> {
             SizedBox(height: 30,),
             Expanded(child: SingleChildScrollView(
               child: Column(children: [
-                CategoryChoiceRow(
-                    imgPath1:'images/categories_choice/business1.jpg',
-                    imgPath2:'images/categories_choice/health.jpg',
-                    text1:'Business',
-                    text2:'Health'
 
-                ), CategoryChoiceRow(
-                    imgPath1:'images/categories_choice/entertainment.jpg',
-                    imgPath2:'images/categories_choice/sports1.jpg',
-                    text1:'Entertainment',
-                    text2:'Sports'
+                Row(children: [
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CategoryTile(
+                      imgUrl: 'images/categories_choice/business1.jpg',
+                      text: 'Business',
+                    ),
+                  ),),
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.only(top:16,right:16,bottom: 16,left: 8),
+                    child: CategoryTile(
+                      imgUrl: 'images/categories_choice/entertainment.jpg',
+                      text: 'Entertainment',
+                    ),
+                  ),),
+                ],),Row(children: [
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CategoryTile(
+                      imgUrl: 'images/categories_choice/health.jpg',
+                      text: 'Health',
+                    ),
+                  ),),
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.only(top:16,right:16,bottom: 16,left: 8),
+                    child: CategoryTile(
+                      imgUrl: 'images/categories_choice/science.jpg',
+                      text: 'Science',
+                    ),
+                  ),),
+                ],),
 
-                ),CategoryChoiceRow(
-                    imgPath1:'images/categories_choice/science.jpg',
-                    imgPath2:'images/categories_choice/technology.jpg',
-                    text1:'Science',
-                    text2:'Technology'
 
-                ),
+
+                // CategoryChoiceRow(
+                //     imgPath1:'images/categories_choice/business1.jpg',
+                //     imgPath2:'images/categories_choice/health.jpg',
+                //     text1:'Business',
+                //     text2:'Health'
+                //
+                // ), CategoryChoiceRow(
+                //     imgPath1:'images/categories_choice/entertainment.jpg',
+                //     imgPath2:'images/categories_choice/sports1.jpg',
+                //     text1:'Entertainment',
+                //     text2:'Sports'
+                //
+                // ),CategoryChoiceRow(
+                //     imgPath1:'images/categories_choice/science.jpg',
+                //     imgPath2:'images/categories_choice/technology.jpg',
+                //     text1:'Science',
+                //     text2:'Technology'
+                //
+                // ),
 
 
               ],),

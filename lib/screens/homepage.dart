@@ -113,6 +113,7 @@ class _HomePageState extends State<HomePage> {
         child: DrawerContainer(),
       ),
       appBar: AppBar(
+        backgroundColor: Color(0XFFEBEBEB),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -132,14 +133,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
         title: Text(
-          'TrendTrivo',
+          'Newsly',
           style: TextStyle(fontWeight: FontWeight.bold,
               fontSize: 24,
               fontFamily: 'LexendDeca',
               color: Colors.black),
         ),
         centerTitle: true,
+
       ),
+      backgroundColor: Color(0XFFF5F5F5),
       body: Column(
         children: [
           SizedBox(height: 10),
@@ -183,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                     height: 60,
                     width: 300,
                     decoration: BoxDecoration(
-                      color: Color(0XFFC3C3C3),
+                      color: Color(0XFFD6D6D6),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Row(
@@ -262,10 +265,7 @@ class _HomePageState extends State<HomePage> {
                             return Builder(
                               builder: (BuildContext context) {
                                 return Container(
-                                  width: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .width,
+                                  width: MediaQuery.of(context).size.width,
                                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                                   decoration: BoxDecoration(
                                     color: Colors.amber,
@@ -276,10 +276,9 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       Center(
                                         child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                              20),
+                                          borderRadius: BorderRadius.circular(20),
                                           child: Image.network(
-                                            newsItem.imageUrl != null ? newsItem.imageUrl.toString():null.toString(),
+                                            newsItem.imageUrl != null ? newsItem.imageUrl.toString() : '',
                                             fit: BoxFit.cover,
                                             width: double.infinity,
                                             height: double.infinity,
@@ -291,24 +290,30 @@ class _HomePageState extends State<HomePage> {
                                         height: double.infinity,
                                         decoration: BoxDecoration(
                                           color: Colors.black.withOpacity(0.3),
-                                          borderRadius: BorderRadius.circular(
-                                              20),
+                                          borderRadius: BorderRadius.circular(20),
                                         ),
                                       ),
                                       Positioned(
                                         bottom: 30,
                                         left: 30,
+                                        right: 30, // Added to ensure the text can wrap within bounds
                                         child: Text(
-                                        newsItem.title ?? 'No Title',
-                                          style: TextStyle(fontSize: 24,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'LexendDeca'),
+                                          newsItem.title ?? 'No Title',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'LexendDeca',
+                                          ),
+                                          overflow:  TextOverflow.ellipsis, // Allows text to wrap
+                                          maxLines: 2,
+                                          softWrap: true, // Ensures text wraps to the next line
                                         ),
                                       ),
                                     ],
                                   ),
                                 );
+
                               },
                             );
                           }).toList(),
