@@ -169,6 +169,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
+
           Expanded(
 
             child: SingleChildScrollView(
@@ -339,30 +340,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  BlocBuilder<NewsBloc, NewsState>(
-                    builder: (context, state) {
-                      if (state is NewsLoadingState) {
-                        return Center(child: CircularProgressIndicator());
-                      } else if (state is NewsLoadedState) {
-                        List<NewsModel> newsLL = state.newsList;
-                        return ListView.builder(
-                          itemCount: newsLL.length, // Use length of the news list
-                          itemBuilder: (context, index) {
-                            final newsItem = newsLL[index];
-                            return ListTile(
-                              title: Text(newsItem.title ?? 'No Title'),
-                              subtitle: Text(newsItem.description ?? 'No Description'),
-                              leading: newsItem.imageUrl != null ? Image.network(newsItem.imageUrl!) : null,
-                            );
-                          },
-                        );
-                      } else if (state is NewsErrorState) {
-                        return Center(child: Text(state.error));
-                      } else {
-                        return Center(child: Text('Error!'));
-                      }
-                    },
-                  ),
+
                   Container(
                     child: Column(
                       children: [
