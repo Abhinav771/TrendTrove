@@ -1,0 +1,1 @@
+enum NewsStatus{loading, success, failure}
