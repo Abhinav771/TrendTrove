@@ -143,105 +143,109 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           SizedBox(height: 10),
-          Expanded(
-            child: BlocBuilder<NewsBloc, NewsState>(
-              builder: (context, state) {
-                if (state is NewsLoadingState) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is NewsLoadedState) {
-                  List<NewsModel> newsLL = state.newsList;
-                  return ListView.builder(
-                    itemCount: newsLL.length, // Use length of the news list
-                    itemBuilder: (context, index) {
-                      final newsItem = newsLL[index];
-                      return ListTile(
-                        title: Text(newsItem.title ?? 'No Title'),
-                        subtitle: Text(newsItem.description ?? 'No Description'),
-                        leading: newsItem.imageUrl != null ? Image.network(newsItem.imageUrl!) : null,
-                      );
-                    },
-                  );
-                } else if (state is NewsErrorState) {
-                  return Center(child: Text(state.error));
-                } else {
-                  return Center(child: Text('Error!'));
-                }
-              },
-            ),
-          ),
+          // Expanded(
+          //   child: BlocBuilder<NewsBloc, NewsState>(
+          //     builder: (context, state) {
+          //       if (state is NewsLoadingState) {
+          //         return Center(child: CircularProgressIndicator());
+          //       } else if (state is NewsLoadedState) {
+          //         List<NewsModel> newsLL = state.newsList;
+          //         return ListView.builder(
+          //           itemCount: newsLL.length, // Use length of the news list
+          //           itemBuilder: (context, index) {
+          //             final newsItem = newsLL[index];
+          //             return ListTile(
+          //               title: Text(newsItem.title ?? 'No Title'),
+          //               subtitle: Text(newsItem.description ?? 'No Description'),
+          //               leading: newsItem.imageUrl != null ? Image.network(newsItem.imageUrl!) : null,
+          //             );
+          //           },
+          //         );
+          //       } else if (state is NewsErrorState) {
+          //         return Center(child: Text(state.error));
+          //       } else {
+          //         return Center(child: Text('Error!'));
+          //       }
+          //     },
+          //   ),
+          // ),
 
           Expanded(
 
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
+            child: Column(
+              children: [
 
 
 
 
-                  Center(
-                    child: Container(
-                      height: 60,
-                      width: 300,
-                      decoration: BoxDecoration(
-                        color: Color(0XFFC3C3C3),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 16.0, right: 4),
-                            child: Icon(
-                                Icons.search, size: 30, color: Colors.white),
-                          ),
-                          Container(
-                            width: 210,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              controller: _searchController,
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                hintStyle: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'LexendDeca',
-                                  color: Colors.white,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                ),
+                Center(
+                  child: Container(
+                    height: 60,
+                    width: 300,
+                    decoration: BoxDecoration(
+                      color: Color(0XFFC3C3C3),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16.0, right: 4),
+                          child: Icon(
+                              Icons.search, size: 30, color: Colors.white),
+                        ),
+                        Container(
+                          width: 210,
+                          child: TextField(
+                            textAlign: TextAlign.center,
+                            controller: _searchController,
+                            decoration: InputDecoration(
+                              hintText: 'Search',
+                              hintStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'LexendDeca',
+                                color: Colors.white,
                               ),
-                              onChanged: (text) {
-                                print('Text: ' + text);
-                              },
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
                             ),
+                            onChanged: (text) {
+                              print('Text: ' + text);
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
+                ),
 
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 16),
-                        child: Text('Top News', style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'LexendDeca')),
-                      ),
-                    ],
-                  ),
-                  BlocBuilder<NewsBloc, NewsState>(
-                    builder: (context, state) {
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, top: 16),
+                      child: Text('Top News', style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'LexendDeca')),
+                    ),
+                  ],
+                ),
+                BlocBuilder<NewsBloc, NewsState>(
+                  builder: (context, state) {
+                    if(state is NewsLoadingState){
+                      return CircularProgressIndicator();
+                    }
+                    else if(state is NewsLoadedState){
+                      List<NewsModel> newsLL = state.newsList;
                       return Container(
                         child: carousel_slider.CarouselSlider(
                           options: CarouselOptions(
@@ -253,7 +257,8 @@ class _HomePageState extends State<HomePage> {
                               });
                             },
                           ),
-                          items: [0, 1, 2].map((i) {
+                          items: [0, 1, 2, 3, 4].map((i) {
+                            final newsItem = newsLL[i];
                             return Builder(
                               builder: (BuildContext context) {
                                 return Container(
@@ -274,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                                           borderRadius: BorderRadius.circular(
                                               20),
                                           child: Image.network(
-                                            '${myList[i][0]}',
+                                            newsItem.imageUrl != null ? newsItem.imageUrl.toString():null.toString(),
                                             fit: BoxFit.cover,
                                             width: double.infinity,
                                             height: double.infinity,
@@ -294,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                                         bottom: 30,
                                         left: 30,
                                         child: Text(
-                                          '${myList[i][1]}',
+                                        newsItem.title ?? 'No Title',
                                           style: TextStyle(fontSize: 24,
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -309,61 +314,96 @@ class _HomePageState extends State<HomePage> {
                           }).toList(),
                         ),
                       );
-                    },
-                  ),
-                  Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        for (int i = 0; i < myList.length; i++)
-                          Container(
-                            margin: EdgeInsets.all(5),
-                            height: 8,
-                            width: i == _currentPage ? 17 : 8,
-                            decoration: BoxDecoration(
-                              color: i == _currentPage ? blueColor : Colors
-                                  .grey,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                  Row(
+
+                    }
+                    else{
+                      return Text('Error');
+                    }
+
+
+                  },
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 16),
-                        child: Text('Recommendation', style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'LexendDeca')),
-                      ),
+                      for (int i = 0; i < 5; i++)
+                        Container(
+                          margin: EdgeInsets.all(5),
+                          height: 8,
+                          width: i == _currentPage ? 17 : 8,
+                          decoration: BoxDecoration(
+                            color: i == _currentPage ? blueColor : Colors
+                                .grey,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
                     ],
                   ),
-
-                  Container(
-                    child: Column(
-                      children: [
-                        NewsTile(
-                          newsImg: 'https://ichef.bbci.co.uk/news/1024/cpsprodpb/16e3/live/990724a0-48d9-11ef-9e1c-3b4a473456a6.jpg.webp',
-                          headline: 'Donald Trump attempted by shooter in election rally.',
-                          category: 'Politics',
-                        ),
-                        NewsTile(
-                          newsImg: 'https://edition.cnn.com/politics/live-news/harris-trump-election-07-25-24/index.html',
-                          headline: 'Headline 1',
-                          category: 'Politics',
-                        ),
-                        NewsTile(
-                          newsImg: 'https://imgs.search.brave.com/Y1xE7IKZNOAEmEUkEwRQLh_nu857vRtGNLu0KEFnQX4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2V0ay5jb20vd3At/Y29udGVudC91cGxv/YWRzL3NpdGVzLzM0/LzIwMjQvMDcvR2V0/dHlJbWFnZXMtMjE2/MTkyNTUzNC5qcGc_/dz05MDA',
-                          headline: 'Headline 1',
-                          category: 'Politics',
-                        ),
-                      ],
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0, top: 16),
+                      child: Text('Recommendation', style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'LexendDeca')),
                     ),
+                  ],
+                ),
+                Expanded(
+                  child: BlocBuilder<NewsBloc, NewsState>(
+                    builder: (context, state) {
+                      if (state is NewsLoadingState) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (state is NewsLoadedState) {
+                        List<NewsModel> newsLL = state.newsList;
+                        return ListView.builder(
+                          itemCount: newsLL.length, // Use length of the news list
+                          itemBuilder: (context, index) {
+                            final newsItem = newsLL[index];
+                            // return ListTile(
+                            //   title: Text(newsItem.title ?? 'No Title'),
+                            //   subtitle: Text(newsItem.description ?? 'No Description'),
+                            //   leading: newsItem.imageUrl != null ? Image.network(newsItem.imageUrl!) : null,
+                            // );
+                            return NewsTile(
+                                newsImg: newsItem.imageUrl != null ? newsItem.imageUrl!.toString() : null.toString(),
+                                headline: newsItem.title.toString(),
+                                category: newsItem.category![0].toString());
+                          },
+                        );
+                      } else if (state is NewsErrorState) {
+                        return Center(child: Text(state.error));
+                      } else {
+                        return Center(child: Text('Error!'));
+                      }
+                    },
                   ),
-                ],
-              ),
+                ),
+                // Container(
+                //   child: Column(
+                //     children: [
+                //       NewsTile(
+                //         newsImg: 'https://ichef.bbci.co.uk/news/1024/cpsprodpb/16e3/live/990724a0-48d9-11ef-9e1c-3b4a473456a6.jpg.webp',
+                //         headline: 'Donald Trump attempted by shooter in election rally.',
+                //         category: 'Politics',
+                //       ),
+                //       NewsTile(
+                //         newsImg: 'https://edition.cnn.com/politics/live-news/harris-trump-election-07-25-24/index.html',
+                //         headline: 'Headline 1',
+                //         category: 'Politics',
+                //       ),
+                //       NewsTile(
+                //         newsImg: 'https://imgs.search.brave.com/Y1xE7IKZNOAEmEUkEwRQLh_nu857vRtGNLu0KEFnQX4/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly93d3cu/a2V0ay5jb20vd3At/Y29udGVudC91cGxv/YWRzL3NpdGVzLzM0/LzIwMjQvMDcvR2V0/dHlJbWFnZXMtMjE2/MTkyNTUzNC5qcGc_/dz05MDA',
+                //         headline: 'Headline 1',
+                //         category: 'Politics',
+                //       ),
+                //     ],
+                //   ),
+                // ),
+              ],
             ),
           ),
         ],
