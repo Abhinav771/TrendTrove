@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/bloc/category/category_bloc.dart';
 import 'package:news_app/bloc/news_event.dart';
 import 'package:news_app/repository/news_repository.dart';
 import 'package:news_app/screens/homepage.dart';
@@ -18,11 +19,16 @@ class MyApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => NewsRepository(),
       child: BlocProvider(
-        create: (context) => NewsBloc(
+        create: (context) =>
+        NewsBloc(
           RepositoryProvider.of<NewsRepository>(context),
-        )..add(LoadNews()),
-        child: MaterialApp(
-          home: HomePage(),
+        )
+          ..add(LoadNews()),
+        child: BlocProvider(
+          create: (context) => CategoryBloc(),
+          child: MaterialApp(
+            home: HomePage(),
+          ),
         ),
       ),
     );

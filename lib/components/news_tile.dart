@@ -51,14 +51,15 @@ class NewsTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
                   child: Container(
-                    height: 25,
-                    width: 70,
+                    // height: 25,
+                    // width: 120,
                     decoration: BoxDecoration(
                       color: blueColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     
-                    child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
                       child: Text(category.toUpperCase(),
                         style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: Colors.white,fontFamily: 'LexendDeca'),
                         overflow: TextOverflow.ellipsis,

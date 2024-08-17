@@ -34,12 +34,17 @@ class NewsErrorState extends NewsState{
 }
 
 
-class NewsCategories extends NewsState{
-  NewsCategories(this.cat);
-  List<String> cat;
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [cat];
-
-}
+// class NewsCategories extends NewsState{
+//   NewsCategories(this.cat);
+//   List<dynamic> cat=[{
+//     'business':false,
+//     'entertainment':false,
+//     'health':false,
+//     'science':false,
+//   }];
+//
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [cat];
+//
+// }

@@ -22,6 +22,10 @@ class NewsBloc extends Bloc<NewsEvent,NewsState>{
       }
     });
 
+    on<ClickOnCategory>((event,emit){
+
+    });
+
   }
 
 }
