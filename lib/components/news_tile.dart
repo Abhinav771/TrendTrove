@@ -17,7 +17,7 @@ class NewsTile extends StatelessWidget {
 
         height: 150,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(children: [
@@ -61,7 +61,7 @@ class NewsTile extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(category.toUpperCase(),
-                        style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold,color: Colors.white,fontFamily: 'LexendDeca'),
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 12),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         // textAlign: TextAlign.center,
@@ -71,7 +71,7 @@ class NewsTile extends StatelessWidget {
                 ),Padding(
                   padding: const EdgeInsets.only(left:8.0,right:8),
                   child:  Text(headline,
-                    style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'LexendDeca'),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 15,color: Theme.of(context).secondaryHeaderColor),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 3,
                     // textAlign: TextAlign.center,

@@ -48,7 +48,7 @@ class CategoryBloc extends Bloc<CategoryEvent,CategoryState>{
                     print(f[2]);
                 }
             }
-            else{
+            else if(event.category=='Politics'){
                 if(f[3]==true){
                     f[3]=false;
                     print('Health: '+f[3].toString());
@@ -56,6 +56,16 @@ class CategoryBloc extends Bloc<CategoryEvent,CategoryState>{
                 else{
                     f[3]=true;
                     print(f[3]);
+                }
+            }
+            else{
+                if(f[4]==true){
+                    f[4]=false;
+                    print('Health: '+f[4].toString());
+                }
+                else{
+                    f[4]=true;
+                    print(f[4]);
                 }
             }
             emit(CategoryFinal(f));

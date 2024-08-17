@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+// backgroundColor: Color(0XFFEBEBEB),
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart' as carousel_slider; // Use alias to avoid conflicts
 import 'package:flutter/material.dart';
@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
         child: DrawerContainer(),
       ),
       appBar: AppBar(
-        backgroundColor: Color(0XFFEBEBEB),
+
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
@@ -134,15 +135,12 @@ class _HomePageState extends State<HomePage> {
         ],
         title: Text(
           'Newsly',
-          style: TextStyle(fontWeight: FontWeight.bold,
-              fontSize: 24,
-              fontFamily: 'LexendDeca',
-              color: Colors.black),
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
         centerTitle: true,
 
       ),
-      backgroundColor: Color(0XFFF5F5F5),
+      // backgroundColor: Color(0XFFF5F5F5),
       body: Column(
         children: [
           SizedBox(height: 10),
@@ -235,10 +233,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, top: 16),
-                      child: Text('Top News', style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'LexendDeca')),
+                      child: Text('Top News', style: Theme.of(context).textTheme.titleLarge,)
                     ),
                   ],
                 ),
@@ -299,12 +294,7 @@ class _HomePageState extends State<HomePage> {
                                         right: 30, // Added to ensure the text can wrap within bounds
                                         child: Text(
                                           newsItem.title ?? 'No Title',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'LexendDeca',
-                                          ),
+                                          style: Theme.of(context).textTheme.titleSmall,
                                           overflow:  TextOverflow.ellipsis, // Allows text to wrap
                                           maxLines: 2,
                                           softWrap: true, // Ensures text wraps to the next line
@@ -350,10 +340,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, top: 16),
-                      child: Text('Recommendation', style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'LexendDeca')),
+                      child: Text('Recommendation', style: Theme.of(context).textTheme.titleLarge),
                     ),
                   ],
                 ),
