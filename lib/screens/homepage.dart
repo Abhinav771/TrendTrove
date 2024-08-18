@@ -12,6 +12,9 @@ import 'package:news_app/utilities/constants.dart';
 import '../bloc/news_bloc.dart';
 import '../bloc/news_event.dart';
 import '../bloc/news_state.dart';
+import '../bloc/theme/theme_bloc.dart';
+import '../bloc/theme/theme_event.dart';
+import '../bloc/theme/theme_state.dart';
 import '../components/drawer_Container.dart';
 import '../components/news_tile.dart';
 import 'package:http/http.dart' as http;
@@ -116,11 +119,37 @@ class _HomePageState extends State<HomePage> {
 
 
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Image.asset(
-                'images/icons/dark_theme.png', height: 30, width: 30),
-          ),
+          BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
+            if(state is LightTheme){
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: GestureDetector(
+                    onTap: (){
+                      context.read<ThemeBloc>().add(ToggleTheme());
+                    },
+                    child:Icon(Icons.brightness_2_sharp,size:25)
+                  // Image.asset(
+                  //     'images/icons/dark_theme.png', height: 30, width: 30),
+                ),
+              );
+            }
+            else{
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: GestureDetector(
+                    onTap: (){
+                      context.read<ThemeBloc>().add(ToggleTheme());
+                    },
+                    child:Icon(Icons.sunny,size:25)
+                  // Image.asset(
+                  //     'images/icons/dark_theme.png', height: 30, width: 30),
+                ),
+              );
+            }
+
+  },
+),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: GestureDetector(
@@ -128,8 +157,9 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => Categories()));
               },
-              child: Image.asset(
-                  'images/icons/category_icon.png', height: 25, width: 25),
+              child: Icon(Icons.category,size:30),
+              // Image.asset(
+              //     'images/icons/category_icon.png', height: 25, width: 25),
             ),
           ),
         ],

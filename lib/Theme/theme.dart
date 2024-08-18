@@ -3,6 +3,10 @@
 
 import 'package:flutter/material.dart';
 
+class ToggleThemeBool{
+  bool isLight=false;
+}
+
 ThemeData lightTheme =ThemeData(
   primaryColor: Colors.white,
   secondaryHeaderColor: Colors.black,

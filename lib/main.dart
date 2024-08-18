@@ -8,6 +8,8 @@ import 'package:news_app/screens/homepage.dart';
 import 'package:news_app/utilities/constants.dart';
 
 import 'bloc/news_bloc.dart';
+import 'bloc/theme/theme_bloc.dart';
+import 'bloc/theme/theme_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,9 +30,25 @@ class MyApp extends StatelessWidget {
           ..add(LoadNews()),
         child: BlocProvider(
           create: (context) => CategoryBloc(),
-          child: MaterialApp(
-            theme: darkTheme,
-            home: HomePage(),
+          child: BlocProvider(
+            create: (context) => ThemeBloc(),
+            child: BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, state) {
+                if(state is LightTheme){
+                  return MaterialApp(
+                    theme: lightTheme,
+                    home: HomePage(),
+                  );
+                }
+                else{
+                  return MaterialApp(
+                    theme: darkTheme,
+                    home: HomePage(),
+                  );
+                }
+
+              },
+            ),
           ),
         ),
       ),
