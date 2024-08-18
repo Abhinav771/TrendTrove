@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:news_app/utilities/constants.dart';
 
@@ -14,18 +16,35 @@ class NewsTile extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         showModalBottomSheet(
+          enableDrag: true,
           context: context,
           builder: (BuildContext context) {
-            return SizedBox(
-              height: 400,
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Close'),
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  alignment: Alignment.centerRight, // Position child at the bottom-right corner
+                  color: Theme.of(context).primaryColor,
+                  width: double.infinity,
+                  height: 40,
+                  child: Icon(Icons.bookmark_border,size: 30,color: Theme.of(context).secondaryHeaderColor,),
+                ),
+               Image.network(newsImg,height: 300,width: double.infinity,),
+              Container(
+                color: Theme.of(context).primaryColor,
+                // height: 400,
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Close'),
+                  ),
                 ),
               ),
+            ],
+
             );
           },
         );

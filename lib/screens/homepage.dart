@@ -289,48 +289,86 @@ class _HomePageState extends State<HomePage> {
                             final newsItem = newsLL[i];
                             return Builder(
                               builder: (BuildContext context) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.amber,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Center(
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(20),
-                                          child: Image.network(
-                                            newsItem.imageUrl != null ? newsItem.imageUrl.toString() : '',
-                                            fit: BoxFit.cover,
-                                            width: double.infinity,
-                                            height: double.infinity,
+                                return GestureDetector(
+                                  onTap: (){
+
+                                      showModalBottomSheet(
+                                        enableDrag: true,
+                                        context: context,
+                                        builder: (BuildContext context) {
+
+                                          return Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.centerRight, // Position child at the bottom-right corner
+                                                color: Theme.of(context).primaryColor,
+                                                width: double.infinity,
+                                                height: 40,
+                                                child: Icon(Icons.bookmark_border,size: 30,color: Theme.of(context).secondaryHeaderColor,),
+                                              ),
+                                              // Image.network(newsImg,height: 300,width: double.infinity,),
+                                              Container(
+                                                color: Theme.of(context).primaryColor,
+                                                // height: 400,
+                                                child: Center(
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text('Close'),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+
+                                          );
+                                        },
+                                      );
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Center(
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(20),
+                                            child: Image.network(
+                                              newsItem.imageUrl != null ? newsItem.imageUrl.toString() : '',
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Container(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Colors.black.withOpacity(0.3),
-                                          borderRadius: BorderRadius.circular(20),
+                                        Container(
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black.withOpacity(0.3),
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
                                         ),
-                                      ),
-                                      Positioned(
-                                        bottom: 30,
-                                        left: 30,
-                                        right: 30, // Added to ensure the text can wrap within bounds
-                                        child: Text(
-                                          newsItem.title ?? 'No Title',
-                                          style: Theme.of(context).textTheme.titleSmall,
-                                          overflow:  TextOverflow.ellipsis, // Allows text to wrap
-                                          maxLines: 2,
-                                          softWrap: true, // Ensures text wraps to the next line
+                                        Positioned(
+                                          bottom: 30,
+                                          left: 30,
+                                          right: 30, // Added to ensure the text can wrap within bounds
+                                          child: Text(
+                                            newsItem.title ?? 'No Title',
+                                            style: Theme.of(context).textTheme.titleSmall,
+                                            overflow:  TextOverflow.ellipsis, // Allows text to wrap
+                                            maxLines: 2,
+                                            softWrap: true, // Ensures text wraps to the next line
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 );
 
