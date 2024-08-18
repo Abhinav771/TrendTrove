@@ -14,6 +14,7 @@ ThemeData lightTheme =ThemeData(
   scaffoldBackgroundColor: Color(0XFFF5F5F5),
   appBarTheme: AppBarTheme(
     backgroundColor: Colors.blue[300],
+
     iconTheme: IconThemeData(
       color: Colors.white,),
   ),
@@ -21,7 +22,7 @@ ThemeData lightTheme =ThemeData(
     headlineLarge: TextStyle(fontWeight: FontWeight.bold,
         fontSize: 32,
         fontFamily: 'LexendDeca',
-        color: Colors.black),
+        color: Colors.white),
     titleLarge: TextStyle(fontWeight: FontWeight.bold,
         fontSize: 25,
         fontFamily: 'LexendDeca',
@@ -47,7 +48,9 @@ ThemeData darkTheme =ThemeData(
 
   appBarTheme: AppBarTheme(
     backgroundColor: Color(0XFF232531),
+
     iconTheme: IconThemeData(
+
       color: Colors.white,),
   ),
   textTheme: TextTheme(

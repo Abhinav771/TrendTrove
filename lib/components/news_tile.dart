@@ -7,47 +7,141 @@ class NewsTile extends StatelessWidget {
   final String newsImg;
   final String headline;
   final String category;
+  final String description;
+  final String sourceName;
+  final String sourceIcon;
 
 
-  const NewsTile({super.key, required this.newsImg, required this.headline, required this.category});
+
+  const NewsTile({super.key, required this.newsImg, required this.headline, required this.category, required this.description, required this.sourceName, required this.sourceIcon});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
         showModalBottomSheet(
-          enableDrag: true,
           context: context,
+          isScrollControlled: true, // Allow the bottom sheet to be sized according to its content
           builder: (BuildContext context) {
-
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  alignment: Alignment.centerRight, // Position child at the bottom-right corner
-                  color: Theme.of(context).primaryColor,
-                  width: double.infinity,
-                  height: 40,
-                  child: Icon(Icons.bookmark_border,size: 30,color: Theme.of(context).secondaryHeaderColor,),
-                ),
-               Image.network(newsImg,height: 300,width: double.infinity,),
-              Container(
-                color: Theme.of(context).primaryColor,
-                // height: 400,
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Close'),
+            return SingleChildScrollView( // Make the content scrollable
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // Ensure Column sizes to its children
+                children: [
+                  Stack(
+                    clipBehavior: Clip.none, // Ensure the Stack doesn't clip children
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.0),
+                          topRight: Radius.circular(20.0),
+                        ),
+                        child: Container(
+                          height: 400, // Adjust height as needed or remove if dynamic height is desired
+                          width: double.infinity,
+                          color: Colors.red,
+                          child: Image.network(
+                            newsImg,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        left: 20,
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 30,
+                        left: 30,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            child: Icon(Icons.arrow_back, size: 30, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        right: 20,
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 30,
+                        right: 30,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            child: Icon(Icons.bookmark_border, size: 30, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                          bottom: 10,
+                          child: Container(
+                            color: Theme.of(context).primaryColor,
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              headline,
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
+                              textAlign: TextAlign.center,
+                              softWrap: true,// Adjust text alignment
+                            ),
+                          ),
+                      ),
+                    ],
                   ),
-                ),
-              ),
-            ],
 
+
+                  Container(
+                    color: Theme.of(context).primaryColor,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      description,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize:16,color: Theme.of(context).secondaryHeaderColor),
+                      textAlign: TextAlign.center, // Adjust text alignment
+
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  // Add spacing
+                  // Container(
+                  //   color: Theme.of(context).primaryColor,
+                  //   child: Center(
+                  //     child: ElevatedButton(
+                  //       onPressed: () {
+                  //         Navigator.pop(context);
+                  //       },
+                  //       child: Text('Close'),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
             );
           },
         );
+
+
+
+
 
       },
       child: Padding(
