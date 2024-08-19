@@ -1,0 +1,3 @@
+class NewsNextPage{
+  String nextPage='';
+}

@@ -75,13 +75,26 @@ class _HomePageState extends State<HomePage> {
   //     return NewsModel.fromJson(data);
   //   }
   // }
+  late ScrollController _scrollController;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _scrollController = ScrollController()
+      ..addListener(() {
+        if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+          // Dispatch LoadMoreNews event when scrolled to the bottom
+          context.read<NewsBloc>().add(LoadMoreNews());
+        }
+      });
+    // Initial load
+    context.read<NewsBloc>().add(LoadNews());
+  }
 
-
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
 
@@ -181,6 +194,7 @@ class _HomePageState extends State<HomePage> {
       ),
       // backgroundColor: Color(0XFFF5F5F5),
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             SizedBox(height: 10),
@@ -376,36 +390,37 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            BlocBuilder<NewsBloc, NewsState>(
-              builder: (context, state) {
-                if (state is NewsLoadingState) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is NewsLoadedState) {
-                  List<NewsModel> newsLL = state.newsList;
-                  return ListView.builder(
-                    itemCount: newsLL.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true, // Ensures the ListView takes only as much space as needed
-                    itemBuilder: (context, index) {
-                      final newsItem = newsLL[index];
-                      return NewsTile(
-                        newsImg: newsItem.imageUrl ?? '',
-                        headline: newsItem.title ?? '',
-                        category: newsItem.category?.isNotEmpty == true ? newsItem.category![0] : '',
-                        description: newsItem.description ?? '',
-                        sourceIcon: newsItem.sourceIcon ?? '',
-                        sourceName: newsItem.sourceName ?? '',
-                      );
-                    },
+        BlocBuilder<NewsBloc, NewsState>(
+          builder: (context, state) {
+            if (state is NewsLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is NewsLoadedState) {
+              List<NewsModel> newsLL = state.newsList;
+              return ListView.builder(
+                itemCount: newsLL.length,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final newsItem = newsLL[index];
+                  return NewsTile(
+                    newsImg: newsItem.imageUrl ?? '',
+                    headline: newsItem.title ?? '',
+                    category: newsItem.category?.isNotEmpty == true ? newsItem.category![0] : '',
+                    description: newsItem.description ?? '',
+                    sourceIcon: newsItem.sourceIcon ?? '',
+                    sourceName: newsItem.sourceName ?? '',
                   );
-                } else if (state is NewsErrorState) {
-                  return Center(child: Text(state.error));
-                } else {
-                  return Center(child: Text('Error!'));
-                }
-              },
-            ),
-          ],
+                },
+              );
+            } else if (state is NewsErrorState) {
+              return Center(child: Text(state.error));
+            } else {
+              return Center(child: Text('Error!'));
+            }
+          },
+        ),
+
+        ],
         ),
       ),
 

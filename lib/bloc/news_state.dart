@@ -14,14 +14,14 @@ class NewsLoadingState extends NewsState{
 
 }
 
-class NewsLoadedState extends NewsState{
-  NewsLoadedState(this.newsList);
+class NewsLoadedState extends NewsState {
   final List<NewsModel> newsList;
+  final bool isLoadingMore;
+
+  NewsLoadedState(this.newsList, {this.isLoadingMore = false});
 
   @override
-  // TODO: implement props
-  List<Object?> get props =>[newsList];
-
+  List<Object?> get props => [newsList, isLoadingMore];
 }
 class NewsErrorState extends NewsState{
   NewsErrorState(this.error);
