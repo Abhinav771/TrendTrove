@@ -5,13 +5,17 @@ import 'package:carousel_slider/carousel_slider.dart' as carousel_slider; // Use
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/backend/function.dart';
+import 'package:news_app/repository/search_repo.dart';
 import 'package:news_app/screens/categories.dart';
+import 'package:news_app/screens/search.dart';
 import 'package:news_app/utilities/constants.dart';
 
 
 import '../bloc/news_bloc.dart';
 import '../bloc/news_event.dart';
 import '../bloc/news_state.dart';
+import '../bloc/search/search_bloc.dart';
+import '../bloc/search/search_event.dart';
 import '../bloc/theme/theme_bloc.dart';
 import '../bloc/theme/theme_event.dart';
 import '../bloc/theme/theme_state.dart';
@@ -60,8 +64,7 @@ class _HomePageState extends State<HomePage> {
   //   super.initState();
   //   news=fetchNews();
   // }
-  static final TextEditingController _searchController = TextEditingController(
-      text: '');
+  static final TextEditingController _searchController = TextEditingController(text: '');
 
 
   // Future<NewsModel> getNewsApi() async {
@@ -210,7 +213,20 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, right: 4),
-                      child: Icon(Icons.search, size: 30, color: Colors.white),
+                      child: GestureDetector(
+                        onTap: () {
+                          final query = _searchController.text;
+                          context.read<SearchBloc>().add(SearchLoadNews(query));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SearchPage(searchResult: query),
+                            ),
+                          );
+                        },
+                        child: Icon(Icons.search, size: 30, color: Colors.white),
+                      ),
+
                     ),
                     Expanded(
                       child: TextField(
