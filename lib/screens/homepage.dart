@@ -11,6 +11,9 @@ import 'package:news_app/screens/search.dart';
 import 'package:news_app/utilities/constants.dart';
 
 
+import '../bloc/bookmark/bookmark_bloc.dart';
+import '../bloc/bookmark/bookmark_event.dart';
+import '../bloc/bookmark/bookmark_state.dart';
 import '../bloc/news_bloc.dart';
 import '../bloc/news_event.dart';
 import '../bloc/news_state.dart';
@@ -293,41 +296,305 @@ class _HomePageState extends State<HomePage> {
                         return Builder(
                           builder: (BuildContext context) {
                             return GestureDetector(
-                              onTap: () {
-                                showModalBottomSheet(
-                                  enableDrag: true,
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.centerRight,
-                                          color: Theme.of(context).primaryColor,
-                                          width: double.infinity,
-                                          height: 40,
-                                          child: Icon(
-                                            Icons.bookmark_border,
-                                            size: 30,
-                                            color: Theme.of(context).secondaryHeaderColor,
-                                          ),
-                                        ),
-                                        Container(
-                                          color: Theme.of(context).primaryColor,
-                                          child: Center(
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text('Close'),
+                                onTap: (){
+                                  showModalBottomSheet(
+                                    backgroundColor: Color(0XFF232531),
+                                    context: context,
+                                    isScrollControlled: true, // Allow the bottom sheet to be sized according to its content
+                                    builder: (BuildContext context) {
+                                      return SingleChildScrollView( // Make the content scrollable
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min, // Ensure Column sizes to its children
+                                          children: [
+                                            Stack(
+                                              clipBehavior: Clip.none, // Ensure the Stack doesn't clip children
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(20.0),
+                                                    topRight: Radius.circular(20.0),
+                                                  ),
+                                                  child: Container(
+                                                    height: 400, // Adjust height as needed or remove if dynamic height is desired
+                                                    width: double.infinity,
+                                                    color: blueColor,
+                                                    child: Image.network(
+                                                      newsItem.imageUrl.toString(),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 20,
+                                                  left: 20,
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(50),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 30,
+                                                  left: 30,
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      child: Icon(Icons.arrow_back, size: 30, color: Colors.white),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 20,
+                                                  right: 20,
+                                                  child: Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.black.withOpacity(0.5),
+                                                      borderRadius: BorderRadius.circular(50),
+                                                    ),
+                                                  ),
+                                                ),
+                                                BlocBuilder<BookmarkBloc, BookmarkState>(
+                                                  builder: (context, state) {
+                                                    bool isBookmarked = false;
+                                                    if (state is FinalBookmarkState) {
+                                                      isBookmarked = state.bookmarkMap[newsItem.articleId] ?? false;
+                                                    }
+
+                                                    return Positioned(
+                                                      top: 30,
+                                                      right: 30,
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          if (isBookmarked) {
+                                                            context.read<BookmarkBloc>().add(RemoveBookmark(articleId: newsItem.articleId.toString()));
+                                                          } else {
+                                                            context.read<BookmarkBloc>().add(AddBookmark(
+                                                              sourceName: newsItem.sourceName.toString(),
+                                                              sourceIcon: newsItem.sourceIcon.toString(),
+                                                              description: newsItem.description.toString(),
+                                                              category: newsItem.category.toString(),
+                                                              newsImg: newsItem.imageUrl.toString(),
+                                                              headline: newsItem.title.toString(),
+                                                              articleId: newsItem.articleId.toString(),
+                                                            ));
+                                                          }
+                                                        },
+                                                        child: Container(
+                                                          child: Icon(
+                                                            isBookmarked ? Icons.bookmark_added_rounded : Icons.bookmark_border,
+                                                            size: 30,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+
+                                                Positioned(
+                                                    bottom: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(left: 16.0,bottom: 8),
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                              color: blueColor,
+                                                              borderRadius: BorderRadius.circular(20),
+                                                            ),
+                                                            child: Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(newsItem.category![0].toString().toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          width: double.infinity,
+                                                          color: Theme.of(context).primaryColor.withOpacity(0.7),
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Column(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+
+                                                              Padding(
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Text(
+                                                                  newsItem.title.toString(),
+                                                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
+                                                                  textAlign: TextAlign.start,
+                                                                  softWrap: true,
+                                                                ),
+                                                              )
+                                                            ],),
+                                                        ),
+                                                      ],)
+
+
+                                                ),
+                                                // Positioned(
+                                                //   top: 325, // Fixed position from the top
+                                                //   left: 0,
+                                                //   right: 0,
+                                                //   bottom: 0, // Ensures the container doesn't overflow the screen
+                                                //   child: Container(
+                                                //     decoration: BoxDecoration(
+                                                //       color: Theme.of(context).primaryColor,
+                                                //       borderRadius: BorderRadius.only(
+                                                //         topLeft: Radius.circular(15.0),
+                                                //         topRight: Radius.circular(15.0),
+                                                //       ),
+                                                //     ),
+                                                //     padding: const EdgeInsets.all(8.0),
+                                                //     child: SingleChildScrollView(
+                                                //       child: Column(
+                                                //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                //         children: [
+                                                //           Row(
+                                                //             children: [
+                                                //               CircleAvatar(
+                                                //                 radius: 30, // Adjust the radius as needed
+                                                //                 backgroundImage: NetworkImage(sourceIcon),
+                                                //               ),
+                                                //               SizedBox(width: 10), // Add spacing between the avatar and text
+                                                //               Expanded(
+                                                //                 child: Text(
+                                                //                   sourceName,
+                                                //                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                //                     fontSize: 26,
+                                                //                     color: Theme.of(context).secondaryHeaderColor,
+                                                //                   ),
+                                                //                   textAlign: TextAlign.start, // Align text to the start
+                                                //                 ),
+                                                //               ),
+                                                //             ],
+                                                //           ),
+                                                //           SizedBox(height: 10), // Add spacing between rows
+                                                //           Text(
+                                                //             description,
+                                                //             style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                                //               fontSize: 16,
+                                                //               color: Theme.of(context).secondaryHeaderColor,
+                                                //             ),
+                                                //             textAlign: TextAlign.start, // Adjust text alignment
+                                                //           ),
+                                                //         ],
+                                                //       ),
+                                                //     ),
+                                                //   ),
+                                                // ),
+                                              ],
                                             ),
-                                          ),
+                                            Container(
+                                              child: Column(children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Row(children: [
+                                                    SizedBox(width: 20,),
+                                                    CircleAvatar(
+
+                                                      backgroundImage: NetworkImage(newsItem.sourceIcon.toString()),
+                                                      radius: 30,
+                                                    ),
+                                                    SizedBox(width: 20,),
+                                                    Text(
+                                                      newsItem.sourceName.toString(),
+                                                      style: Theme.of(context).textTheme.titleLarge,
+                                                      overflow: TextOverflow.ellipsis, // Adds '...' at the end if text overflows
+                                                      maxLines: 1, // Limits the text to a single line
+                                                    ),
+
+
+                                                  ],),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Theme.of(context).primaryColor.withOpacity(0.7),
+                                                      borderRadius: BorderRadius.circular(30),
+                                                    ),
+                                                    width: double.infinity,
+                                                    // color: Theme.of(context).primaryColor.withOpacity(0.7),
+                                                    padding: const EdgeInsets.all(8.0),
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+
+                                                        Padding(
+                                                          padding: const EdgeInsets.all(8.0),
+                                                          child: Text(
+                                                            newsItem.description.toString(),
+                                                            style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 16,color: Theme.of(context).secondaryHeaderColor),
+                                                            textAlign: TextAlign.start,
+                                                            softWrap: true,
+                                                          ),
+                                                        )
+                                                      ],),
+                                                  ),
+                                                ),
+                                              ],),
+                                            ),
+
+
+
+
+
+
+
+
+                                            // Container(
+                                            //   decoration: BoxDecoration(
+                                            //     color: Theme.of(context).primaryColor,
+                                            //     borderRadius: BorderRadius.only(
+                                            //       topLeft: Radius.circular(15.0),
+                                            //       topRight: Radius.circular(15.0),
+                                            //     ),
+                                            //   ),
+                                            //
+                                            //   padding: const EdgeInsets.all(8.0),
+                                            //   child: Text(
+                                            //     description,
+                                            //     style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize:16,color: Theme.of(context).secondaryHeaderColor),
+                                            //     textAlign: TextAlign.center, // Adjust text alignment
+                                            //
+                                            //   ),
+                                            // ),
+                                            SizedBox(height: 16),
+                                            // Add spacing
+                                            // Container(
+                                            //   color: Theme.of(context).primaryColor,
+                                            //   child: Center(
+                                            //     child: ElevatedButton(
+                                            //       onPressed: () {
+                                            //         Navigator.pop(context);
+                                            //       },
+                                            //       child: Text('Close'),
+                                            //     ),
+                                            //   ),
+                                            // ),
+                                          ],
                                         ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
+                                      );
+                                    },
+                                  );
+
+
+
+
+
+                                },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 margin: EdgeInsets.symmetric(horizontal: 5.0),

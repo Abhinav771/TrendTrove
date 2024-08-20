@@ -75,7 +75,7 @@ class _CategoriesState extends State<Categories> {
     ),
     );
     },
-                child: Text('See result',style:Theme.of(context).textTheme.titleSmall)),
+                child: Text('See result',style:Theme.of(context).textTheme.titleSmall?.copyWith(color:Theme.of(context).secondaryHeaderColor ))),
             SizedBox(height: 30,),
             Expanded(child: SingleChildScrollView(
               child: Column(children: [
