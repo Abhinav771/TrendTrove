@@ -45,6 +45,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/app_icon/newsly_icon.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -73,6 +79,8 @@ flutter:
     - images/icons/dark_theme.png
     - images/categories_choice/business1.jpg
     - images/avatar/img_avatar.webp
+    - images/failed_img/news_img_failed.webp
+    - images/app_icon/newsly_icon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -276,7 +276,7 @@ class _HomePageState extends State<HomePage> {
             BlocBuilder<TopNewsBloc, TopNewsState>(
               builder: (context, state) {
                 if (state is TopNewsLoadingState) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: CircularProgressIndicator(color:blueColor));
                 } else if (state is TopNewsLoadedState) {
                   List<NewsModel> newsLL = state.newsList;
                   return SizedBox(
@@ -681,7 +681,7 @@ class _HomePageState extends State<HomePage> {
         BlocBuilder<NewsBloc, NewsState>(
           builder: (context, state) {
             if (state is NewsLoadingState) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(color: blueColor,));
             } else if (state is NewsLoadedState) {
               List<NewsModel> newsLL = state.newsList;
               return ListView.builder(
