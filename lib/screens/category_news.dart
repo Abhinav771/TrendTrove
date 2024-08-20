@@ -47,6 +47,7 @@ class _CategoryNewsState extends State<CategoryNews> {
                         description: newsItem.description ?? '',
                         sourceIcon: newsItem.sourceIcon ?? '',
                         sourceName: newsItem.sourceName ?? '',
+                        articleId: newsItem.articleId ?? '',
                       );
                     },
                   );

@@ -433,6 +433,7 @@ class _HomePageState extends State<HomePage> {
                     description: newsItem.description ?? '',
                     sourceIcon: newsItem.sourceIcon ?? '',
                     sourceName: newsItem.sourceName ?? '',
+                    articleId: newsItem.articleId ?? '',
                   );
                 },
               );

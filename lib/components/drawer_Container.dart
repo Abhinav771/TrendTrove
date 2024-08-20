@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/saved_news.dart';
 
 class DrawerContainer extends StatefulWidget {
   const DrawerContainer({
@@ -33,6 +34,14 @@ class _DrawerContainerState extends State<DrawerContainer> {
           ),
           SizedBox(height: 50,),
           ListTile(
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SavedNews(),
+                ),
+              );
+            },
             leading: Icon(Icons.bookmark_added),
             title: Text('Saved Articles',style: TextStyle(fontFamily:'LexendDeca',fontWeight: FontWeight.bold),),
           ),ListTile(

@@ -54,6 +54,7 @@ class _SearchPageState extends State<SearchPage> {
                         description: newsItem.description ?? '',
                         sourceIcon: newsItem.sourceIcon ?? '',
                         sourceName: newsItem.sourceName ?? '',
+                        articleId: newsItem.articleId ?? '',
                       );
                     },
                   );

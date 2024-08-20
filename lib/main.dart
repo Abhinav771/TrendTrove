@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/Theme/theme.dart';
+import 'package:news_app/bloc/bookmark/bookmark_bloc.dart';
 import 'package:news_app/bloc/category/category_bloc.dart';
 import 'package:news_app/bloc/news_bloc.dart';
 import 'package:news_app/bloc/search/search_bloc.dart';
@@ -64,7 +65,10 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TopNewsBloc(TopNewsRepository())..add(TopLoadNews()),
           child: HomePage(),
-        )
+        ),
+        BlocProvider(
+            create: (context) => BookmarkBloc(),
+        ),
 
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(

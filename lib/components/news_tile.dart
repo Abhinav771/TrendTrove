@@ -1,9 +1,15 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/bloc/bookmark/bookmark_event.dart';
 import 'package:news_app/utilities/constants.dart';
 
+import '../bloc/bookmark/bookmark_bloc.dart';
+import '../bloc/bookmark/bookmark_state.dart';
+
 class NewsTile extends StatelessWidget {
+  final String articleId;
   final String newsImg;
   final String headline;
   final String category;
@@ -13,7 +19,7 @@ class NewsTile extends StatelessWidget {
 
 
 
-  const NewsTile({super.key, required this.newsImg, required this.headline, required this.category, required this.description, required this.sourceName, required this.sourceIcon});
+  const NewsTile({super.key, required this.newsImg, required this.headline, required this.category, required this.description, required this.sourceName, required this.sourceIcon, required this.articleId});
 
   @override
   Widget build(BuildContext context) {
@@ -82,18 +88,44 @@ class NewsTile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
-                        top: 30,
-                        right: 30,
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            child: Icon(Icons.bookmark_border, size: 30, color: Colors.white),
-                          ),
-                        ),
+                      BlocBuilder<BookmarkBloc, BookmarkState>(
+                        builder: (context, state) {
+                          bool isBookmarked = false;
+                          if (state is FinalBookmarkState) {
+                            isBookmarked = state.bookmarkMap[articleId] ?? false;
+                          }
+
+                          return Positioned(
+                            top: 30,
+                            right: 30,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (isBookmarked) {
+                                  context.read<BookmarkBloc>().add(RemoveBookmark(articleId: articleId));
+                                } else {
+                                  context.read<BookmarkBloc>().add(AddBookmark(
+                                    sourceName: sourceName,
+                                    sourceIcon: sourceIcon,
+                                    description: description,
+                                    category: category,
+                                    newsImg: newsImg,
+                                    headline: headline,
+                                    articleId: articleId,
+                                  ));
+                                }
+                              },
+                              child: Container(
+                                child: Icon(
+                                  isBookmarked ? Icons.bookmark_added_rounded : Icons.bookmark_border,
+                                  size: 30,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
+
                       Positioned(
                         bottom: 0,
                         left: 0,
