@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        backgroundColor: Theme.of(context).primaryColor,
         child: DrawerContainer(),
       ),
       appBar: AppBar(
@@ -211,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                 height: 60,
                 width: 300,
                 decoration: BoxDecoration(
-                  color: Color(0XFFD6D6D6),
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Row(
@@ -229,22 +230,18 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         },
-                        child: Icon(Icons.search, size: 30, color: Colors.white),
+                        child: Icon(Icons.search, size: 30, color: Theme.of(context).secondaryHeaderColor),
                       ),
 
                     ),
                     Expanded(
                       child: TextField(
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 20,color:Theme.of(context).secondaryHeaderColor ),
                         textAlign: TextAlign.center,
                         controller: _searchController,
                         decoration: InputDecoration(
                           hintText: 'Search',
-                          hintStyle: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'LexendDeca',
-                            color: Colors.white,
-                          ),
+                          hintStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 20,color:Theme.of(context).secondaryHeaderColor ),
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                           ),

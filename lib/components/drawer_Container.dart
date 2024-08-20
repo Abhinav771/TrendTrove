@@ -27,7 +27,7 @@ class _DrawerContainerState extends State<DrawerContainer> {
 
               ),
               SizedBox(height: 20,),
-              Text('Abhinav Vats',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25,fontFamily:'LexendDeca'),),
+              Text('Abhinav Vats',style: Theme.of(context).textTheme.titleLarge),
 
             ],)
 
@@ -42,11 +42,11 @@ class _DrawerContainerState extends State<DrawerContainer> {
                 ),
               );
             },
-            leading: Icon(Icons.bookmark_added),
-            title: Text('Saved Articles',style: TextStyle(fontFamily:'LexendDeca',fontWeight: FontWeight.bold),),
+            leading: Icon(Icons.bookmark_added,color: Theme.of(context).secondaryHeaderColor,),
+            title: Text('Saved Articles',style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).secondaryHeaderColor),),
           ),ListTile(
-            leading: Icon(Icons.login_outlined),
-            title: Text('Log Out',style: TextStyle(fontFamily:'LexendDeca',fontWeight: FontWeight.bold),),
+            leading: Icon(Icons.login_outlined,color: Theme.of(context).secondaryHeaderColor,),
+            title: Text('Log Out',style: Theme.of(context).textTheme.titleSmall?.copyWith(color: Theme.of(context).secondaryHeaderColor),),
           ),
         ],),
       ),
