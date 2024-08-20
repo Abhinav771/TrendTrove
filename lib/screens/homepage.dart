@@ -19,6 +19,9 @@ import '../bloc/search/search_event.dart';
 import '../bloc/theme/theme_bloc.dart';
 import '../bloc/theme/theme_event.dart';
 import '../bloc/theme/theme_state.dart';
+import '../bloc/top_news/top_news_bloc.dart';
+import '../bloc/top_news/top_news_event.dart';
+import '../bloc/top_news/top_news_state.dart';
 import '../components/drawer_Container.dart';
 import '../components/news_tile.dart';
 import 'package:http/http.dart' as http;
@@ -92,6 +95,8 @@ class _HomePageState extends State<HomePage> {
       });
     // Initial load
     context.read<NewsBloc>().add(LoadNews());
+    context.read<TopNewsBloc>().add(TopLoadNews());
+
   }
 
   @override
@@ -268,11 +273,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            BlocBuilder<NewsBloc, NewsState>(
+            BlocBuilder<TopNewsBloc, TopNewsState>(
               builder: (context, state) {
-                if (state is NewsLoadingState) {
+                if (state is TopNewsLoadingState) {
                   return Center(child: CircularProgressIndicator());
-                } else if (state is NewsLoadedState) {
+                } else if (state is TopNewsLoadedState) {
                   List<NewsModel> newsLL = state.newsList;
                   return SizedBox(
                     height: 200.0, // Adjust height as needed
@@ -376,11 +381,14 @@ class _HomePageState extends State<HomePage> {
                       }).toList(),
                     ),
                   );
+                } else if (state is TopNewsErrorState) {
+                  return Center(child: Text(state.error));
                 } else {
-                  return Text('Error');
+                  return Center(child: Text('Error!'));
                 }
               },
             ),
+
             Container(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
