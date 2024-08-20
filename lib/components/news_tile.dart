@@ -20,6 +20,7 @@ class NewsTile extends StatelessWidget {
     return GestureDetector(
       onTap: (){
         showModalBottomSheet(
+          backgroundColor: Color(0XFF232531),
           context: context,
           isScrollControlled: true, // Allow the bottom sheet to be sized according to its content
           builder: (BuildContext context) {
@@ -94,32 +95,174 @@ class NewsTile extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                          bottom: 10,
-                          child: Container(
-                            color: Theme.of(context).primaryColor,
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              headline,
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
-                              textAlign: TextAlign.center,
-                              softWrap: true,// Adjust text alignment
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 16.0,bottom: 8),
+                              child: Container(
+                              decoration: BoxDecoration(
+                              color: blueColor,
+                              borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(category.toUpperCase(),style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                              ),
+                              ),
                             ),
+                              Container(
+                                width: double.infinity,
+                            color: Theme.of(context).primaryColor.withOpacity(0.7),
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    headline,
+                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 20),
+                                    textAlign: TextAlign.start,
+                                    softWrap: true,
+                                  ),
+                                )
+                              ],),
                           ),
+                          ],)
+
+
                       ),
+                      // Positioned(
+                      //   top: 325, // Fixed position from the top
+                      //   left: 0,
+                      //   right: 0,
+                      //   bottom: 0, // Ensures the container doesn't overflow the screen
+                      //   child: Container(
+                      //     decoration: BoxDecoration(
+                      //       color: Theme.of(context).primaryColor,
+                      //       borderRadius: BorderRadius.only(
+                      //         topLeft: Radius.circular(15.0),
+                      //         topRight: Radius.circular(15.0),
+                      //       ),
+                      //     ),
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: SingleChildScrollView(
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Row(
+                      //             children: [
+                      //               CircleAvatar(
+                      //                 radius: 30, // Adjust the radius as needed
+                      //                 backgroundImage: NetworkImage(sourceIcon),
+                      //               ),
+                      //               SizedBox(width: 10), // Add spacing between the avatar and text
+                      //               Expanded(
+                      //                 child: Text(
+                      //                   sourceName,
+                      //                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      //                     fontSize: 26,
+                      //                     color: Theme.of(context).secondaryHeaderColor,
+                      //                   ),
+                      //                   textAlign: TextAlign.start, // Align text to the start
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //           SizedBox(height: 10), // Add spacing between rows
+                      //           Text(
+                      //             description,
+                      //             style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      //               fontSize: 16,
+                      //               color: Theme.of(context).secondaryHeaderColor,
+                      //             ),
+                      //             textAlign: TextAlign.start, // Adjust text alignment
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
-
-
                   Container(
-                    color: Theme.of(context).primaryColor,
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      description,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize:16,color: Theme.of(context).secondaryHeaderColor),
-                      textAlign: TextAlign.center, // Adjust text alignment
+                    child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(children: [
+                          SizedBox(width: 20,),
+                          CircleAvatar(
 
-                    ),
+                            backgroundImage: NetworkImage(sourceIcon),
+                            radius: 30,
+                          ),
+                          SizedBox(width: 20,),
+                          Text(sourceName,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+
+                        ],),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor.withOpacity(0.7),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          width: double.infinity,
+                          // color: Theme.of(context).primaryColor.withOpacity(0.7),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  description,
+                                  style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 16,color: Theme.of(context).secondaryHeaderColor),
+                                  textAlign: TextAlign.start,
+                                  softWrap: true,
+                                ),
+                              )
+                            ],),
+                        ),
+                      ),
+                    ],),
                   ),
+                  
+
+
+
+
+
+
+
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: Theme.of(context).primaryColor,
+                  //     borderRadius: BorderRadius.only(
+                  //       topLeft: Radius.circular(15.0),
+                  //       topRight: Radius.circular(15.0),
+                  //     ),
+                  //   ),
+                  //
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Text(
+                  //     description,
+                  //     style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize:16,color: Theme.of(context).secondaryHeaderColor),
+                  //     textAlign: TextAlign.center, // Adjust text alignment
+                  //
+                  //   ),
+                  // ),
                   SizedBox(height: 16),
                   // Add spacing
                   // Container(
