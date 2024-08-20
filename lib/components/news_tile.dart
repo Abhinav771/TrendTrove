@@ -39,7 +39,7 @@ class NewsTile extends StatelessWidget {
                         child: Container(
                           height: 400, // Adjust height as needed or remove if dynamic height is desired
                           width: double.infinity,
-                          color: Colors.red,
+                          color: blueColor,
                           child: Image.network(
                             newsImg,
                             fit: BoxFit.cover,
@@ -203,9 +203,13 @@ class NewsTile extends StatelessWidget {
                             radius: 30,
                           ),
                           SizedBox(width: 20,),
-                          Text(sourceName,
+                          Text(
+                            sourceName,
                             style: Theme.of(context).textTheme.titleLarge,
+                            overflow: TextOverflow.ellipsis, // Adds '...' at the end if text overflows
+                            maxLines: 1, // Limits the text to a single line
                           ),
+
 
                         ],),
                       ),
