@@ -23,8 +23,7 @@ class _DrawerContainerState extends State<DrawerContainer> {
             child: Column(children: [
               CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.grey,
-
+                backgroundImage: AssetImage('images/avatar/img_avatar.webp'),
               ),
               SizedBox(height: 20,),
               Text('Abhinav Vats',style: Theme.of(context).textTheme.titleLarge),

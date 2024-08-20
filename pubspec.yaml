@@ -72,6 +72,7 @@ flutter:
     - images/icons/category_icon.png
     - images/icons/dark_theme.png
     - images/categories_choice/business1.jpg
+    - images/avatar/img_avatar.webp
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

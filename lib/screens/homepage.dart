@@ -599,7 +599,7 @@ class _HomePageState extends State<HomePage> {
                                 width: MediaQuery.of(context).size.width,
                                 margin: EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.amber,
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Stack(
