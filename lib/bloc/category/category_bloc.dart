@@ -7,70 +7,39 @@ import 'package:news_app/bloc/category/category_event.dart';
 import 'package:news_app/bloc/category/category_state.dart';
 import 'package:news_app/utils/category_list.dart';
 
-class CategoryBloc extends Bloc<CategoryEvent,CategoryState>{
-    CategoryList categoryList=CategoryList();
-    CategoryBloc():super(CategoryInitial()){
+class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
+    final CategoryList categoryList = CategoryList();
 
-        on<SelectCategory>((event,emit){
-            emit(CategoryInitial());
+    CategoryBloc() : super(CategoryInitial()) {
+        on<SelectCategory>((event, emit) {
+            // Create a new list to avoid direct mutation
+            List<bool> updatedList = List.from(categoryList.categoryBoolList);
 
-            List<dynamic> f=categoryList.categoryBoolList;
-            if(event.category=='Business'){
-                print('Select Category Called');
-                print(f[0]);
-                if(f[0]==true){
-                    f[0]=false;
-                    print('Health: '+f[0].toString());
-                }
-                else{
-                    f[0]=true;
-                    print(f[0]);
-                }
-
+            int index = _getCategoryIndex(event.category);
+            if (index != null) {
+                updatedList[index] = !updatedList[index];
+                print('Updated List: $updatedList');
+                categoryList.categoryBoolList = updatedList;
+                emit(CategoryFinal(updatedList));
             }
-            else if(event.category=='Entertainment'){
-                if(f[1]==true){
-                    f[1]=false;
-                    print(f[1]);
-                }
-                else{
-                    f[1]=true;
-                    print(f[1]);
-                }
-            }
-            else if(event.category=='Health'){
-                if(f[2]==true){
-                    f[2]=false;
-                    print('Enter: '+f[2].toString());
-                }
-                else{
-                    f[2]=true;
-                    print(f[2]);
-                }
-            }
-            else if(event.category=='Politics'){
-                if(f[3]==true){
-                    f[3]=false;
-                    print('Health: '+f[3].toString());
-                }
-                else{
-                    f[3]=true;
-                    print(f[3]);
-                }
-            }
-            else{
-                if(f[4]==true){
-                    f[4]=false;
-                    print('Health: '+f[4].toString());
-                }
-                else{
-                    f[4]=true;
-                    print(f[4]);
-                }
-            }
-            emit(CategoryFinal(f));
-            categoryList.categoryBoolList=f;
         });
+    }
 
+    // Helper function to get index based on category name
+    int _getCategoryIndex(String category) {
+        switch (category) {
+            case 'Business':
+                return 0;
+            case 'Entertainment':
+                return 1;
+            case 'Health':
+                return 2;
+            case 'Politics':
+                return 3;
+
+
+            default:
+                return 4;
+        }
     }
 }

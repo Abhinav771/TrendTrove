@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/screens/category_news.dart';
 import 'package:news_app/utils/category_list.dart';
 
 import '../bloc/category/category_bloc.dart';
 import '../bloc/category/category_event.dart';
 import '../bloc/category/category_state.dart';
+import '../bloc/category_api/category_api_bloc.dart';
+import '../bloc/category_api/category_api_event.dart';
 import '../components/category_choice.dart';
 import '../components/category_choice_row.dart';
 class Categories extends StatefulWidget {
@@ -24,6 +27,55 @@ class _CategoriesState extends State<Categories> {
         ),
         body: Container(
           child: Column(children: [
+            GestureDetector(
+              onTap: () {
+            // Access the CategoryBloc to get the current state
+            final categoryState = context.read<CategoryBloc>().state;
+
+        // Check if the state is of type `CategoryFinal` which contains the updated list
+        if (categoryState is CategoryFinal) {
+      List<dynamic> l = categoryState.fcat;
+
+      // Use StringBuffer for better performance
+      StringBuffer catBuffer = StringBuffer();
+
+      if (l[0]) {
+        catBuffer.write('Business,');
+      }
+      if (l[1]) {
+        catBuffer.write('Entertainment,');
+      }
+      if (l[2]) {
+        catBuffer.write('Health,');
+      }
+      if (l[3]) {
+        catBuffer.write('Politics,');
+      }
+      if (l[4]) {
+        catBuffer.write('Sports,');
+      }
+
+      // Convert StringBuffer to String and remove trailing comma
+      String cat = catBuffer.toString();
+      if (cat.endsWith(',')) {
+        cat = cat.substring(0, cat.length - 1);
+      }
+
+      // Dispatch event with the formatted category string
+      print('******************************************************8cat: ' + cat);
+      context.read<CategoryApiBloc>().add(CategoryLoadNews(cat));
+    } else {
+    print('No valid category state available.');
+    }
+
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (context) => CategoryNews(),
+    ),
+    );
+    },
+                child: Text('See result',style:Theme.of(context).textTheme.titleSmall)),
             SizedBox(height: 30,),
             Expanded(child: SingleChildScrollView(
               child: Column(children: [
