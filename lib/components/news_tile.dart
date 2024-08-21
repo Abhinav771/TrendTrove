@@ -27,6 +27,7 @@ class NewsTile extends StatelessWidget {
       onTap: (){
         showModalBottomSheet(
           backgroundColor: Color(0XFF232531),
+          // backgroundColor: Theme.of(context).primaryColor,
           context: context,
           isScrollControlled: true, // Allow the bottom sheet to be sized according to its content
           builder: (BuildContext context) {
@@ -237,7 +238,7 @@ class NewsTile extends StatelessWidget {
                           SizedBox(width: 20,),
                           Text(
                             sourceName,
-                            style: Theme.of(context).textTheme.titleLarge,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Theme.of(context).secondaryHeaderColor),
                             overflow: TextOverflow.ellipsis, // Adds '...' at the end if text overflows
                             maxLines: 1, // Limits the text to a single line
                           ),
